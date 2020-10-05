@@ -28,13 +28,13 @@ function obtenirDetailEtablissement($id)
    return $req;
 }
 
-function supprimerEtablissement($connexion, $id)
+function supprimerEtablissement($id)
 {
    $req="delete from Etablissement where id='$id'";
-   mysql_query($req, $connexion);
+   return $req;
 }
  
-function modifierEtablissement($connexion, $id, $nom, $adresseRue, $codePostal, 
+function modifierEtablissement($id, $nom, $adresseRue, $codePostal, 
                                $ville, $tel, $adresseElectronique, $type, 
                                $civiliteResponsable, $nomResponsable, 
                                $prenomResponsable, $nombreChambresOffertes)
@@ -53,10 +53,10 @@ function modifierEtablissement($connexion, $id, $nom, $adresseRue, $codePostal,
          '$nomResponsable',prenomResponsable='$prenomResponsable',
          nombreChambresOffertes='$nombreChambresOffertes' where id='$id'";
    
-   mysql_query($req, $connexion);
+  return $req;
 }
 
-function creerEtablissement($connexion, $id, $nom, $adresseRue, $codePostal, 
+function creerEtablissement($id, $nom, $adresseRue, $codePostal, 
                             $ville, $tel, $adresseElectronique, $type, 
                             $civiliteResponsable, $nomResponsable, 
                             $prenomResponsable, $nombreChambresOffertes)
@@ -73,18 +73,17 @@ function creerEtablissement($connexion, $id, $nom, $adresseRue, $codePostal,
          '$civiliteResponsable', '$nomResponsable', '$prenomResponsable',
          '$nombreChambresOffertes')";
    
-   mysql_query($req, $connexion);
+   return $req;
 }
 
 
-function estUnIdEtablissement($connexion, $id)
+function estUnIdEtablissement($id)
 {
    $req="select * from Etablissement where id='$id'";
-   $rsEtab=mysql_query($req, $connexion);
-   return mysql_fetch_array($rsEtab);
+   return $req;
 }
 
-function estUnNomEtablissement($connexion, $mode, $id, $nom)
+function estUnNomEtablissement($mode, $id, $nom)
 {
    $nom=str_replace("'", "''", $nom);
    // S'il s'agit d'une création, on vérifie juste la non existence du nom sinon
@@ -98,31 +97,26 @@ function estUnNomEtablissement($connexion, $mode, $id, $nom)
    {
       $req="select * from Etablissement where nom='$nom' and id!='$id'";
    }
-   $rsEtab=mysql_query($req, $connexion);
-   return mysql_fetch_array($rsEtab);
+   return $req;
 }
 
-function obtenirNbEtab($connexion)
+function obtenirNbEtab()
 {
    $req="select count(*) as nombreEtab from Etablissement";
-   $rsEtab=mysql_query($req, $connexion);
-   $lgEtab=mysql_fetch_array($rsEtab);
-   return $lgEtab["nombreEtab"];
+   return $req;
 }
 
-function obtenirNbEtabOffrantChambres($connexion)
+function obtenirNbEtabOffrantChambres()
 {
    $req="select count(*) as nombreEtabOffrantChambres from Etablissement where 
          nombreChambresOffertes!=0";
-   $rsEtabOffrantChambres=mysql_query($req, $connexion);
-   $lgEtabOffrantChambres=mysql_fetch_array($rsEtabOffrantChambres);
-   return $lgEtabOffrantChambres["nombreEtabOffrantChambres"];
+   return $req;
 }
 
 // Retourne false si le nombre de chambres transmis est inférieur au nombre de 
 // chambres occupées pour l'établissement transmis 
 // Retourne true dans le cas contraire
-function estModifOffreCorrecte($connexion, $idEtab, $nombreChambres)
+function estModifOffreCorrecte($idEtab, $nombreChambres)
 {
    $nbOccup=obtenirNbOccup($connexion, $idEtab);
    return ($nombreChambres>=$nbOccup);
@@ -136,37 +130,32 @@ function obtenirReqIdNomGroupesAHeberger()
    return $req;
 }
 
-function obtenirNomGroupe($connexion, $id)
+function obtenirNomGroupe($id)
 {
    $req="select nom from Groupe where id='$id'";
-   $rsGroupe=mysql_query($req, $connexion);
-   $lgGroupe=mysql_fetch_array($rsGroupe);
-   return $lgGroupe["nom"];
+   return $req;
 }
 
 // FONCTIONS RELATIVES AUX ATTRIBUTIONS
 
 // Teste la présence d'attributions pour l'établissement transmis    
-function existeAttributionsEtab($connexion, $id)
+function existeAttributionsEtab($id)
 {
    $req="select * From Attribution where idEtab='$id'";
-   $rsAttrib=mysql_query($req, $connexion);
-   return mysql_fetch_array($rsAttrib);
+   return $req;
 }
 
 // Retourne le nombre de chambres occupées pour l'id étab transmis
-function obtenirNbOccup($connexion, $idEtab)
+function obtenirNbOccup($idEtab)
 {
    $req="select IFNULL(sum(nombreChambres), 0) as totalChambresOccup from
         Attribution where idEtab='$idEtab'";
-   $rsOccup=mysql_query($req, $connexion);
-   $lgOccup=mysql_fetch_array($rsOccup);
-   return $lgOccup["totalChambresOccup"];
+   return $req;
 }
 
 // Met à jour (suppression, modification ou ajout) l'attribution correspondant à
 // l'id étab et à l'id groupe transmis
-function modifierAttribChamb($connexion, $idEtab, $idGroupe, $nbChambres)
+function modifierAttribChamb($idEtab, $idGroupe, $nbChambres)
 {
    $req="select count(*) as nombreAttribGroupe from Attribution where idEtab=
         '$idEtab' and idGroupe='$idGroupe'";
@@ -182,7 +171,7 @@ function modifierAttribChamb($connexion, $idEtab, $idGroupe, $nbChambres)
       else
          $req="insert into Attribution values('$idEtab','$idGroupe', $nbChambres)";
    }
-   mysql_query($req, $connexion);
+   return $req;
 }
 
 // Retourne la requête permettant d'obtenir les id et noms des groupes affectés
@@ -196,13 +185,13 @@ function obtenirReqGroupesEtab($id)
             
 // Retourne le nombre de chambres occupées par le groupe transmis pour l'id étab
 // et l'id groupe transmis
-function obtenirNbOccupGroupe($connexion, $idEtab, $idGroupe)
+function obtenirNbOccupGroupe($idEtab, $idGroupe)
 {
    $req="select nombreChambres From Attribution where idEtab='$idEtab'
         and idGroupe='$idGroupe'";
    $rsAttribGroupe=mysql_query($req, $connexion);
-   if ($lgAttribGroupe=mysql_fetch_array($rsAttribGroupe))
-      return $lgAttribGroupe["nombreChambres"];
+   if ($donnees = $resultat->fetch())
+      return $donnees;
    else
       return 0;
 }
