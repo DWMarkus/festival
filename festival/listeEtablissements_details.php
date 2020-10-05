@@ -27,9 +27,13 @@ session_start();
         
 
         <tr>
-          <th><!-- Adresse --></th>
-          <th><!-- Ville --></th>
-          <th><!-- CP --></th>
+          <th>Adresse</th>
+          <th width="5%"><!-- Espace --></th>
+          <th>Responsable</th>
+          <th width="5%"><!-- Espace --></th>
+          <th>Téléphone</th>
+          <th width="5%"><!-- Espace --></th>
+          <th>Mail</th>
         </tr>
 
 <?php
@@ -39,8 +43,23 @@ session_start();
         ?>
         <tr>
 
-          <td><?php echo $donnees['adresseRue'];?>,</td>
-          <td><?php echo $donnees['ville'];?> <?php echo $donnees['codePostal'];?></td>
+          <td><?php echo $donnees['adresseRue'];?>, <?php echo $donnees['ville'];?> <?php echo $donnees['codePostal'];?></td>
+          <td></td>
+          <td><?php echo $donnees['civiliteResponsable'];?>. 
+            <?php echo $donnees['prenomResponsable'];?> 
+            <?php echo $donnees['nomResponsable'];?></td>
+          <td></td>
+          <td><?php echo $donnees['tel'];?></td>
+          <td></td>
+          <td><?php 
+              if (!$donnees['adresseElectronique']) {
+                echo "Mail indisponible.";
+              }
+              else
+              {
+                echo $donnees['adresseElectronique'];?>
+              }
+          </td>
         </tr>
       <?php   
         }
@@ -49,3 +68,11 @@ session_start();
 
     </center>
   </section>
+    
+    <section class="u-backlink u-clearfix u-grey-80">
+      <p class="u-text">
+        <span>&copy;2020 Maison des Ligues - BTS SIO2</span>
+      </p>. 
+    </section>
+  </body>
+</html>
