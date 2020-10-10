@@ -30,9 +30,9 @@ if ($_REQUEST['action']=='demanderSupprEtab')
    echo "
    <br><center><h5>Souhaitez-vous vraiment supprimer l'établissement $nom ? 
    <br><br>
-   <a href='suppressionEtablissement.php?action=validerSupprEtab&amp;id=$id'>
+   <a href='EtablissementSup.php?action=validerSupprEtab&amp;id=$id'>
    Oui</a>&nbsp; &nbsp; &nbsp; &nbsp;
-   <a href='listeEtablissements.php?'>Non</a></h5></center>";
+   <a href='EtablissementsListe.php?'>Non</a></h5></center>";
 }
 
 // Cas 2ème étape (on vient de suppressionEtablissement.php)
