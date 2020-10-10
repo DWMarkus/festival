@@ -17,6 +17,7 @@ session_start();
   $prenomR=$_POST['prenomR'];
   $chambre=$_POST['chambre'];
   $type=$_POST['type'];
+
 /*
   echo $id;
   echo $nom;
@@ -31,6 +32,7 @@ session_start();
   echo $chambre;
   echo $type;
 */
+
 ?>
   <link rel="stylesheet" type="text/css" href="formulaire.css">
     <section class="u-align-center u-clearfix u-grey-70 u-section-1" id="sec-0b7d">
@@ -50,11 +52,11 @@ $req=modifierEtablissement($id, $nom, $adresse, $cp,
 $res=$bdd->exec($req);
   if (!$res) 
   {
-    echo 'Modification échouée.'
+    echo "<br><center><h5>Modification échouée.</h5><a href='EtablissementsListe.php'>Retour</a></center>.";
   }
   else
   {
-    echo 'Modification réussie.';
+    echo "<br><center><h5>Modification réussie.</h5><a href='EtablissementsListe.php'>Retour</a></center>.";
   }
 
 ?>

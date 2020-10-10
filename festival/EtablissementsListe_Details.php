@@ -24,7 +24,7 @@ session_start();
     
 <section>
     <center>
-      <a href="EtablissementsListe.php">Retour</a>
+      <a href="EtablissementsListe.php" class="u-btn u-btn-submit u-button-style">Retour</a>
     <caption><h3><?php echo $nomE;?></h3></caption>
       <table>
 

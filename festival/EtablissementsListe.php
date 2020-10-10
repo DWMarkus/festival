@@ -38,7 +38,7 @@ session_start();
 					<th width="10px"><!-- Espace --></th>
 					<th><!-- Supprimer --></th>
 				</tr>
-<?php
+				<?php
 
 				while ($donnees = $resultat->fetch()) 
 				{
@@ -69,9 +69,10 @@ session_start();
 						{
 					?>
 					<td>
-						<form action="EtablissementSup.php" method="post">
-						<input type="hidden" name="idE" value="<?php echo $donnees['id'];?>">
-						<a href='EtablissementSup.php?action=demanderSupprEtab&amp;'>Supprimer</a></td>
+						<form action="EtablissementSup.php?action=demanderSupprEtab" method="POST">
+							<input type="hidden" name="id" value="<?php echo $donnees['id'];?>">
+							<input type="submit" name="envoi" value="Supprimer">
+						<!-- <a href='EtablissementSup.php?action=demanderSupprEtab&amp;id=$id'>Supprimer</a></td> -->
 					</form>
 					</td>
 					<?php
@@ -84,7 +85,14 @@ session_start();
 			?>
 
 			</table>
-		</center>
+		
+			<br>
+				<form action="EtablissementCreate.php?action=demanderCreEtab" method="POST">
+					<input type="submit" name="envoi" value="Créer un établissement" class="u-btn u-btn-submit u-button-style">
+				</form>
+			<br>
+
+	</center>
 
 </section>
     

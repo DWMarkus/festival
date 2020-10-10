@@ -45,28 +45,21 @@ function modifierEtablissement($id, $nom, $adresse, $cp,
          codePostal='$cp',ville='$ville',tel='$tel',
          adresseElectronique='$email',type='$type',
          civiliteResponsable='$civil',nomResponsable=
-         '$nomR',prenomR='$prenomResponsable',
+         '$nomR',prenomResponsable='$prenomR',
          nombreChambresOffertes='$chambre' where id='$id'";
    
   return $req;
 }
 
-function creerEtablissement($id, $nom, $adresseRue, $codePostal, 
-                            $ville, $tel, $adresseElectronique, $type, 
-                            $civiliteResponsable, $nomResponsable, 
-                            $prenomResponsable, $nombreChambresOffertes)
+function creerEtablissement($id, $nom, $adresse, $cp, 
+                               $ville, $tel, $email, $type, 
+                               $civil, $nomR, $prenomR, $chambre)
 { 
-   $nom=str_replace("'", "''", $nom);
-   $adresseRue=str_replace("'","''", $adresseRue);
-   $ville=str_replace("'","''", $ville);
-   $adresseElectronique=str_replace("'","''", $adresseElectronique);
-   $nomResponsable=str_replace("'","''", $nomResponsable);
-   $prenomResponsable=str_replace("'","''", $prenomResponsable);
    
-   $req="insert into Etablissement values ('$id', '$nom', '$adresseRue', 
-         '$codePostal', '$ville', '$tel', '$adresseElectronique', '$type', 
-         '$civiliteResponsable', '$nomResponsable', '$prenomResponsable',
-         '$nombreChambresOffertes')";
+   $req="insert into Etablissement values ('$id', '$nom', '$adresse', 
+         '$cp', '$ville', '$tel', '$email', '$type', 
+         '$civil', '$nomR', '$prenomR',
+         '$chambre')";
    
    return $req;
 }

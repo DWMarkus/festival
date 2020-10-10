@@ -5,11 +5,10 @@ session_start();
 	include("_gestionBase.inc.php");
 	include("_controlesEtGestionErreurs.inc.php");
 
-$idE=$_POST['idE'];
-
-echo $idE;
 
 $id=$_REQUEST['id'];
+
+echo $id;
 
 $req=obtenirDetailEtablissement($id);
 $res=$bdd->query($req);
@@ -38,7 +37,7 @@ if ($_REQUEST['action']=='demanderSupprEtab')
    <br><br>
    <a href='EtablissementSup.php?action=validerSupprEtab&amp;id=$id'>
    Oui</a>&nbsp; &nbsp; &nbsp; &nbsp;
-   <a href='EtablissementsListe.php?'>Non</a></h5></center>";
+   <a href='EtablissementsListe.php'>Non</a></h5></center>";
 }
 
 // Cas 2ème étape (on vient de suppressionEtablissement.php)
@@ -49,11 +48,11 @@ else
    $resultat=$bdd->exec($req);
    if (!$resultat) 
    {
-     echo "<br><br><center><h5>Suppression échouée.</h5><a href='EtablissementsListes.php?'>Retour</a></center>";
+     echo "<br><br><center><h5>Suppression échouée.</h5><a href='EtablissementsListe.php'>Retour</a></center>";
    }
    else
    {
-    echo "<br><br><center><h5>L'établissement $nom a été supprimé</h5><a href='EtablissementsListes.php?'>Retour</a></center>";
+    echo "<br><br><center><h5>L'établissement $nom a été supprimé</h5><a href='EtablissementsListe.php?'>Retour</a></center>";
    }
    
 }

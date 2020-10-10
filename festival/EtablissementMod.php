@@ -6,6 +6,7 @@ session_start();
 	include("_controlesEtGestionErreurs.inc.php");
 
   $idE=$_POST['id'];
+  echo $idE;
   $req=obtenirDetailEtablissement($idE);
   $res=$bdd->query($req);
   $donnees=$res->fetch();
@@ -24,7 +25,7 @@ session_start();
     
     <section>
       <center>
-      <a href="EtablissementsListe.php">Retour</a>
+      <a href="EtablissementsListe.php" class="u-btn u-btn-submit u-button-style">Retour</a>
       <caption><h3><?php echo $donnees['nom'];?></h3></caption>
       </center>
       <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
@@ -74,7 +75,7 @@ session_start();
               <input type="text" placeholder="<?php echo $donnees['prenomResponsable'];?>" id="prenomR" name="prenomR" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
             </div>
 
-              <input type="hidden" id="id" name="id" value="<?php echo $donnees['id'];?>" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+              <input type="hidden" id="id" name="id" value="<?php echo $idE;?>" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
 
             <div class="u-form-group u-form-name u-form-group-3">
               <label class="u-label"><strong>Chambres offertes :</strong> <?php echo $donnees['nombreChambresOffertes'];?></label>
