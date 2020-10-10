@@ -5,6 +5,10 @@ session_start();
 	include("_gestionBase.inc.php");
 	include("_controlesEtGestionErreurs.inc.php");
 
+$idE=$_POST['idE'];
+
+echo $idE;
+
 $id=$_REQUEST['id'];
 
 $req=obtenirDetailEtablissement($id);
@@ -27,8 +31,6 @@ $nom=$donnees['nom'];
 <section>
 <?php
 
-  echo $id;
-
 if ($_REQUEST['action']=='demanderSupprEtab')    
 {
    echo "
@@ -47,7 +49,7 @@ else
    $resultat=$bdd->exec($req);
    if (!$resultat) 
    {
-     echo "Suppression échouée.";
+     echo "<br><br><center><h5>Suppression échouée.</h5><a href='EtablissementsListes.php?'>Retour</a></center>";
    }
    else
    {
