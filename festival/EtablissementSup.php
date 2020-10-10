@@ -47,7 +47,7 @@ else
    }
    else
    {
-    echo "<br><br><center><h5>L'établissement $nom a été supprimé</h5><a href='listeEtablissements.php?'>Retour</a></center>";
+    echo "<br><br><center><h5>L'établissement $nom a été supprimé</h5><a href='EtablissementsListes.php?'>Retour</a></center>";
    }
    
 }
