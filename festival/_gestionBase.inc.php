@@ -1,5 +1,7 @@
 <?php
 
+include("bibliotheque.php");
+
 // FONCTIONS DE GESTION DES ÉTABLISSEMENTS
 
 function obtenirReqEtablissements()
@@ -17,7 +19,7 @@ function obtenirReqEtablissementsOffrantChambres()
 
 function obtenirReqEtablissementsAyantChambresAttribuées()
 {
-   $req="select distinct id, nom, nombreChambresOffertes from Etablissement, 
+   $req="select distinct etablissement.id as id, nom, nombreChambresOffertes from Etablissement, 
          Attribution where id = idEtab order by id";
    return $req;
 }
@@ -34,24 +36,17 @@ function supprimerEtablissement($id)
    return $req;
 }
  
-function modifierEtablissement($id, $nom, $adresseRue, $codePostal, 
-                               $ville, $tel, $adresseElectronique, $type, 
-                               $civiliteResponsable, $nomResponsable, 
-                               $prenomResponsable, $nombreChambresOffertes)
+function modifierEtablissement($id, $nom, $adresse, $cp, 
+                               $ville, $tel, $email, $type, 
+                               $civil, $nomR, $prenomR, $chambre)
 {  
-   $nom=str_replace("'", "''", $nom);
-   $adresseRue=str_replace("'","''", $adresseRue);
-   $ville=str_replace("'","''", $ville);
-   $adresseElectronique=str_replace("'","''", $adresseElectronique);
-   $nomResponsable=str_replace("'","''", $nomResponsable);
-   $prenomResponsable=str_replace("'","''", $prenomResponsable);
   
-   $req="update Etablissement set nom='$nom',adresseRue='$adresseRue',
-         codePostal='$codePostal',ville='$ville',tel='$tel',
-         adresseElectronique='$adresseElectronique',type='$type',
-         civiliteResponsable='$civiliteResponsable',nomResponsable=
-         '$nomResponsable',prenomResponsable='$prenomResponsable',
-         nombreChambresOffertes='$nombreChambresOffertes' where id='$id'";
+   $req="update Etablissement set nom='$nom',adresseRue='$adresse',
+         codePostal='$cp',ville='$ville',tel='$tel',
+         adresseElectronique='$email',type='$type',
+         civiliteResponsable='$civil',nomResponsable=
+         '$nomR',prenomR='$prenomResponsable',
+         nombreChambresOffertes='$chambre' where id='$id'";
    
   return $req;
 }
@@ -103,7 +98,9 @@ function estUnNomEtablissement($mode, $id, $nom)
 function obtenirNbEtab()
 {
    $req="select count(*) as nombreEtab from Etablissement";
-   return $req;
+   $res=$bdd->query($req);
+   $lgEtab=$res->fetch();
+   return $nbOccup['nombreEtab'];
 }
 
 function obtenirNbEtabOffrantChambres()
@@ -148,9 +145,10 @@ function existeAttributionsEtab($id)
 // Retourne le nombre de chambres occupées pour l'id étab transmis
 function obtenirNbOccup($idEtab)
 {
-   $req="select IFNULL(sum(nombreChambres), 0) as totalChambresOccup from
+   $requete="select IFNULL(sum(nombreChambres), 0) as totalChambresOccup from
         Attribution where idEtab='$idEtab'";
-   return $req;
+   return $requete;
+
 }
 
 // Met à jour (suppression, modification ou ajout) l'attribution correspondant à
@@ -176,24 +174,20 @@ function modifierAttribChamb($idEtab, $idGroupe, $nbChambres)
 
 // Retourne la requête permettant d'obtenir les id et noms des groupes affectés
 // dans l'établissement transmis
-function obtenirReqGroupesEtab($id)
+function obtenirReqGroupesEtab($idEtab)
 {
-   $req="select distinct id, nom from Groupe, Attribution where 
-        Attribution.idGroupe=Groupe.id and idEtab='$id'";
+   $req="select distinct id, nom, nombreChambres from equipe, Attribution where 
+        Attribution.idEquipe=equipe.id and idEtab='$idEtab'";
    return $req;
 }
             
 // Retourne le nombre de chambres occupées par le groupe transmis pour l'id étab
 // et l'id groupe transmis
-function obtenirNbOccupGroupe($idEtab, $idGroupe)
+function obtenirNbOccupGroupe($idEtab, $idEq)
 {
    $req="select nombreChambres From Attribution where idEtab='$idEtab'
-        and idGroupe='$idGroupe'";
-   $rsAttribGroupe=mysql_query($req, $connexion);
-   if ($donnees = $resultat->fetch())
-      return $donnees;
-   else
-      return 0;
-}
+        and idEquipe='$idEq'";
+   return $req;
 
+}
 ?>
