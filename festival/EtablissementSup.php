@@ -39,11 +39,17 @@ if ($_REQUEST['action']=='demanderSupprEtab')
 
 else
 {
-  echo "It's a prank";
-   /*supprimerEtablissement($id);
-   echo "
-   <br><br><center><h5>L'établissement $nom a été supprimé</h5>
-   <a href='listeEtablissements.php?'>Retour</a></center>";*/
+   $req=supprimerEtablissement($id);
+   $resultat=$bdd->exec($req);
+   if (!resultat) 
+   {
+     echo "Suppression échouée.";
+   }
+   else
+   {
+    echo "<br><br><center><h5>L'établissement $nom a été supprimé</h5><a href='listeEtablissements.php?'>Retour</a></center>";
+   }
+   
 }
 
 ?>
