@@ -70,9 +70,7 @@ session_start();
 					?>
 					<td>
 						<form action="EtablissementSup.php" method="post">
-						<input type="hidden" name="id" value="<?php echo $donnees['id'];?>">
-						<a href='EtablissementSup.php?action=demanderSupprEtab&amp;id=$id'>
-            Supprimer</a>
+						<a href='EtablissementSup.php?action=demanderSupprEtab&amp;id=$id'>Supprimer</a></td>
 					</form>
 					</td>
 					<?php

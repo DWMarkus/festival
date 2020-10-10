@@ -5,12 +5,14 @@ session_start();
 	include("_gestionBase.inc.php");
 	include("_controlesEtGestionErreurs.inc.php");
 
-  $id=$_REQUEST['id'];
+$id=$_REQUEST['id'];
 
-$lgEtab=obtenirDetailEtablissement($id);
-$res=$bdd->query($lgEtab);
+$req=obtenirDetailEtablissement($id);
+$res=$bdd->query($req);
 $donnees=$res->fetch();
+
 $nom=$donnees['nom'];
+
 ?>
 
     <section class="u-align-center u-clearfix u-grey-70 u-section-1" id="sec-0b7d">
@@ -24,6 +26,8 @@ $nom=$donnees['nom'];
     
 <section>
 <?php
+
+  echo $id;
 
 if ($_REQUEST['action']=='demanderSupprEtab')    
 {
@@ -41,7 +45,7 @@ else
 {
    $req=supprimerEtablissement($id);
    $resultat=$bdd->exec($req);
-   if (!resultat) 
+   if (!$resultat) 
    {
      echo "Suppression échouée.";
    }
