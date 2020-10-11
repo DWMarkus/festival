@@ -17,7 +17,7 @@ session_start();
     
     <section>
       <center>
-      <a href="Etablissements_TraitCreate.php" class="u-btn u-btn-submit u-button-style">Retour</a>
+      <a href="EtablissementsListe.php" class="u-btn u-btn-submit u-button-style">Retour</a>
       <caption><h3>Formulaire de création d'établissement</h3></caption>
       </center>
       <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
@@ -85,10 +85,6 @@ session_start();
       </div>
     </section>
 
-    <section class="u-backlink u-clearfix u-grey-80">
-      <p class="u-text">
-        <span>&copy;2020 Maison des Ligues - BTS SIO2</span>
-      </p>. 
-    </section>
-  </body>
-</html>
+<?php
+  include('footer.html');
+?>

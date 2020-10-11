@@ -59,12 +59,6 @@ $res=$bdd->exec($req);
     echo "<br><center><h5>Modification réussie.</h5><a href='EtablissementsListe.php'>Retour</a></center>.";
   }
 
+  include('footer.html');
+  
 ?>
-
-    <section class="u-backlink u-clearfix u-grey-80">
-      <p class="u-text">
-        <span>&copy;2020 Maison des Ligues - BTS SIO2</span>
-      </p>. 
-    </section>
-  </body>
-</html>

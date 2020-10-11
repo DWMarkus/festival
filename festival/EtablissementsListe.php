@@ -76,11 +76,7 @@ session_start();
 					</form>
 					</td>
 					<?php
-						}
-					?>
-				</tr>
-
-			<?php		
+						}		
 				}
 			?>
 
@@ -96,10 +92,6 @@ session_start();
 
 </section>
     
-    <section class="u-backlink u-clearfix u-grey-80">
-      <p class="u-text">
-        <span>&copy;2020 Maison des Ligues - BTS SIO2</span>
-      </p>. 
-    </section>
-  </body>
-</html>
+<?php
+  include('footer.html');
+?>

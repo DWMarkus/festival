@@ -20,8 +20,6 @@ session_start();
 
    $nbEtab = obtenirNbEtabOffrantChambres();
 
-   
-
    if ($nbEtab!=FALSE)
    {
   
@@ -29,10 +27,11 @@ session_start();
     <center>
     <section>
       <caption><h3>Listes des Établissements</h3></caption>
-      <a href="?????????" target="_blank">Effectuer ou modifier les attributions</a>
-
+          <form action="attributionsMod.php??action=demanderModifAttrib" method="POST">
+              <input type="submit" name="envoi" class="u-btn u-btn-submit u-button-style" value="Effectuer ou modifier les attributions">
+          </form>
     
-      <table style="border-bottom: 1px solid black;">
+      <table>
 
         <tr>
           <th><!-- Nom Et --></th>
@@ -62,14 +61,14 @@ session_start();
         $dispo = $nbOffre - $nbOccup;
 ?>
        <tr>
-          <td><strong>
+          <td style="border-top: 2px solid black;"><strong>
             <?php echo $donnees['nom'];?></strong><em> (Offre : <?php echo $donnees['nombreChambresOffertes'];?> / Disponibles : <?php echo $dispo;?>)
           </em></td>
         </tr>
 
         <tr>
-          <td><strong>Nom groupe</strong></td>
-          <td><strong>Chambre attribuées</strong></td>
+          <td><strong>Nom équipe (Ville)</strong></td>
+          <td><strong>Chambres attribuées</strong></td>
         </tr> 
 <?php
     
@@ -85,7 +84,7 @@ session_start();
           $NomEquipe=$ligne['nom'];
         ?>
 
-          <td><?php echo $ligne['nom'];?></td>
+          <td><?php echo $ligne['nom'];?> (<?php echo $ligne['nomVille'];?>)</td>
 
       <?php
 
@@ -115,10 +114,6 @@ session_start();
     </center>
 </section>
     
-    <section class="u-backlink u-clearfix u-grey-80">
-      <p class="u-text">
-        <span>&copy;2020 Maison des Ligues - BTS SIO2</span>
-      </p>. 
-    </section>
-  </body>
-</html>
+<?php
+  include('footer.html');
+?>

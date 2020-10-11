@@ -146,10 +146,10 @@ function obtenirNbOccup($idEtab)
 
 // Met à jour (suppression, modification ou ajout) l'attribution correspondant à
 // l'id étab et à l'id groupe transmis
-function modifierAttribChamb($idEtab, $idGroupe, $nbChambres)
+function modifierAttribChamb($idEtab, $idEquipe, $nbChambres)
 {
    $req="select count(*) as nombreAttribGroupe from Attribution where idEtab=
-        '$idEtab' and idGroupe='$idGroupe'";
+        '$idEtab' and idEquipe='$idEquipe'";
    $rsAttrib=mysql_query($req, $connexion);
    $lgAttrib=mysql_fetch_array($rsAttrib);
    if ($nbChambres==0)
@@ -169,7 +169,7 @@ function modifierAttribChamb($idEtab, $idGroupe, $nbChambres)
 // dans l'établissement transmis
 function obtenirReqGroupesEtab($idEtab)
 {
-   $req="select distinct id, nom, nombreChambres from equipe, Attribution where 
+   $req="select distinct id, nom, nombreChambres, nomVille from equipe, Attribution where 
         Attribution.idEquipe=equipe.id and idEtab='$idEtab'";
    return $req;
 }

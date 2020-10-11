@@ -8,8 +8,6 @@ session_start();
 
 $id=$_REQUEST['id'];
 
-echo $id;
-
 $req=obtenirDetailEtablissement($id);
 $res=$bdd->query($req);
 $donnees=$res->fetch();
@@ -56,5 +54,7 @@ else
    }
    
 }
+
+  include('footer.html');
 
 ?>
